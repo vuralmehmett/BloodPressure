@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{98D3D0EF-567D-4F79-A241-A1DA5A59FAC4}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BloodPressureDoctor</RootNamespace>
+    <AssemblyName>BloodPressureDoctor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Kafka\Connector.cs" />
+    <Compile Include="Kafka\GetPatientInfo.cs" />
+    <Compile Include="Model\BasePartitionResponse.cs" />
+    <Compile Include="Model\BaseResponse.cs" />
+    <Compile Include="Model\BaseTopic.cs" />
+    <Compile Include="Model\BitWorks.cs" />
+    <Compile Include="Model\BloodPressureModel.cs" />
+    <Compile Include="Model\BufferReader.cs" />
+    <Compile Include="Model\Crc32.cs" />
+    <Compile Include="Model\FetchPartitionRequest.cs" />
+    <Compile Include="Model\FetchPartitionResponse.cs" />
+    <Compile Include="Model\FetchRequest.cs" />
+    <Compile Include="Model\FetchResponse.cs" />
+    <Compile Include="Model\FetchTopic.cs" />
+    <Compile Include="Model\FetchTopicRequest.cs" />
+    <Compile Include="Model\IRequestBuffer.cs" />
+    <Compile Include="Model\KafkaConnection.cs" />
+    <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\MessageSet.cs" />
+    <Compile Include="Model\OffsetPartitionRequest.cs" />
+    <Compile Include="Model\OffsetPartitionResponse.cs" />
+    <Compile Include="Model\OffsetRequest.cs" />
+    <Compile Include="Model\OffsetResponse.cs" />
+    <Compile Include="Model\OffsetTopic.cs" />
+    <Compile Include="Model\Partition.cs" />
+    <Compile Include="Model\ProducePartitionRequest.cs" />
+    <Compile Include="Model\ProduceRequest.cs" />
+    <Compile Include="Model\ProduceTopic.cs" />
+    <Compile Include="Model\Request.cs" />
+    <Compile Include="Model\RequestType.cs" />
+    <Compile Include="Model\Topic.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
