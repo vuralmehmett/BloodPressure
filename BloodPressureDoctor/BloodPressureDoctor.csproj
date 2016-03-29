@@ -37,7 +37,12 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.1.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.6.1\lib\net45\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,44 +52,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Kafka\Connector.cs" />
-    <Compile Include="Kafka\GetPatientInfo.cs" />
-    <Compile Include="Model\BasePartitionResponse.cs" />
-    <Compile Include="Model\BaseResponse.cs" />
-    <Compile Include="Model\BaseTopic.cs" />
-    <Compile Include="Model\BitWorks.cs" />
+    <Compile Include="Abstract\AbstractQueue.cs" />
+    <Compile Include="Common\Connector.cs" />
+    <Compile Include="Queues\RabbitMq.cs" />
+    <Compile Include="GetPatient\GetPatientInfo.cs" />
     <Compile Include="Model\BloodPressureModel.cs" />
-    <Compile Include="Model\BufferReader.cs" />
-    <Compile Include="Model\Crc32.cs" />
-    <Compile Include="Model\FetchPartitionRequest.cs" />
-    <Compile Include="Model\FetchPartitionResponse.cs" />
-    <Compile Include="Model\FetchRequest.cs" />
-    <Compile Include="Model\FetchResponse.cs" />
-    <Compile Include="Model\FetchTopic.cs" />
-    <Compile Include="Model\FetchTopicRequest.cs" />
-    <Compile Include="Model\IRequestBuffer.cs" />
-    <Compile Include="Model\KafkaConnection.cs" />
-    <Compile Include="Model\Message.cs" />
-    <Compile Include="Model\MessageSet.cs" />
-    <Compile Include="Model\OffsetPartitionRequest.cs" />
-    <Compile Include="Model\OffsetPartitionResponse.cs" />
-    <Compile Include="Model\OffsetRequest.cs" />
-    <Compile Include="Model\OffsetResponse.cs" />
-    <Compile Include="Model\OffsetTopic.cs" />
-    <Compile Include="Model\Partition.cs" />
-    <Compile Include="Model\ProducePartitionRequest.cs" />
-    <Compile Include="Model\ProduceRequest.cs" />
-    <Compile Include="Model\ProduceTopic.cs" />
-    <Compile Include="Model\Request.cs" />
-    <Compile Include="Model\RequestType.cs" />
-    <Compile Include="Model\Topic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

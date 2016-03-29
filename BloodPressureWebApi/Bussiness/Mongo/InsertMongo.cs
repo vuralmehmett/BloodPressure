@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using BloodPressureWebApi.Bussiness.Kafka;
 using BloodPressureWebApi.Models;
+using BloodPressureWebApi.Bussiness.QueueStructure;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -8,11 +8,13 @@ namespace BloodPressureWebApi.Bussiness.Mongo
 {
     public class InsertMongo
     {
+        private const string ConnectionString = "mongodb://192.168.86.128:27017";
         public void InsertMongoDb(BloodPressureModel model)
         {
 
-            var kafka = new GetMessageFromKafka();
-            var messageList = kafka.GetMessage("atiba");
+            DataTransfer asd = new DataTransfer();
+            
+            var messageList = asd.GetMessage();
 
             var modelList = new List<BloodPressureModel>();
 
@@ -22,11 +24,7 @@ namespace BloodPressureWebApi.Bussiness.Mongo
                 modelList.Add(serializedJson);
             }
 
-            
-
-            const string connectionString = "mongodb://192.168.86.128:27017";
-
-            var client = new MongoClient(connectionString);
+            var client = new MongoClient(ConnectionString);
 
             var database = client.GetDatabase("TestVural");
 

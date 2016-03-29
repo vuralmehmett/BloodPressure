@@ -1,5 +1,5 @@
 ﻿using System;
-using BloodPressureDoctor.Kafka;
+using BloodPressureDoctor.GetPatient;
 
 namespace BloodPressureDoctor
 {
@@ -7,6 +7,7 @@ namespace BloodPressureDoctor
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Enter a patient number : ");
             string clientNo = Console.ReadLine();
 
@@ -14,8 +15,11 @@ namespace BloodPressureDoctor
             var patient = info.GetInfo(clientNo);
             Console.WriteLine("Patient Number : " + patient.ClientNo);
             Console.WriteLine("Pressure : "  + patient.Pressure);
-            Console.WriteLine("Date : " + patient.TimeStamp);
+            Console.WriteLine("Date : " + DateTime.Now);
             Console.ReadLine();
         }
+
+
+     
     }
 }
