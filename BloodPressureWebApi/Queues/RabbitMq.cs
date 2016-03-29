@@ -27,31 +27,15 @@ namespace BloodPressureWebApi.Queues
                     autoDelete: false,
                     arguments: null);
 
-                for (int i = 0; i < 100; i++)
-                {
-                    var serializedJson = Newtonsoft.Json.JsonConvert.SerializeObject(model);
-                    var body = Encoding.UTF8.GetBytes(serializedJson.ToString());
 
-                    channel.BasicPublish(exchange: "",
-                        routingKey: TopicName,
-                        basicProperties: null,
-                        body: body);
-                    Console.WriteLine(" [x] Sent {0} : {1} , Thread{2}", body, i,
-                        System.Threading.Thread.CurrentThread.ManagedThreadId);
-                }
+                var serializedJson = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                var body = Encoding.UTF8.GetBytes(serializedJson);
 
-                //TODO : Test for performance
-                // Parallel.For(2, 5000, i =>
-                // {
-                //     string message = i + "Test messages";
-                //     var body = Encoding.UTF8.GetBytes(message);
-                //
-                //     channel.BasicPublish(exchange: "",
-                //         routingKey: "test",
-                //         basicProperties: null,
-                //         body: body);
-                //     Console.WriteLine(" [x] Sent {0} : {1} , Thread{2}", message, i, System.Threading.Thread.CurrentThread.ManagedThreadId);
-                //
+                channel.BasicPublish(exchange: "",
+                    routingKey: TopicName,
+                    basicProperties: null,
+                    body: body);
+
             }
 
             return true;
@@ -65,7 +49,7 @@ namespace BloodPressureWebApi.Queues
                 var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
 
                 var consumer = new QueueingBasicConsumer(channel);
-                channel.BasicConsume(TopicName, false, consumer);
+                channel.BasicConsume(TopicName, false, consumer); // todo : mesajı aldıktan sonra kuyruktan silen parametre burada ki "false" olan. False olarak bırakıyorum çünkü mesajı kuyruktan alıp mongoya yazıyorum. Doktor tarafında silicem.
 
                 Console.WriteLine(" [*] Processing existing messages.");
 
@@ -80,6 +64,6 @@ namespace BloodPressureWebApi.Queues
                 return MessageList;
             }
         }
-      
+
     }
 }

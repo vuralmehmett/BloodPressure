@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BloodPressureWebApi.Models;
 using BloodPressureWebApi.Bussiness.QueueStructure;
 using MongoDB.Bson;
@@ -8,14 +9,15 @@ namespace BloodPressureWebApi.Bussiness.Mongo
 {
     public class InsertMongo
     {
-        private const string ConnectionString = "mongodb://192.168.86.128:27017";
+        public static string ConnectionString = System.Configuration.ConfigurationManager.AppSettings["MongoConnection"];
+        public static string MongoDbName = System.Configuration.ConfigurationManager.AppSettings["MongoDbName"];
+        public static string MongoCollectionName = System.Configuration.ConfigurationManager.AppSettings["MongoCollectionName"];
+
         public void InsertMongoDb(BloodPressureModel model)
         {
 
-            DataTransfer asd = new DataTransfer();
-            
-            var messageList = asd.GetMessage();
-
+            DataTransfer dataTransfer = new DataTransfer();
+            var messageList = dataTransfer.GetMessage();
             var modelList = new List<BloodPressureModel>();
 
             for (var i = 0; i < messageList.Count; i++)
@@ -25,10 +27,8 @@ namespace BloodPressureWebApi.Bussiness.Mongo
             }
 
             var client = new MongoClient(ConnectionString);
-
-            var database = client.GetDatabase("TestVural");
-
-            var collection = database.GetCollection<BsonDocument>("TestKafka");
+            var database = client.GetDatabase(MongoDbName);
+            var collection = database.GetCollection<BsonDocument>(MongoCollectionName);
 
             for (var i = 0; i < modelList.Count; i++)
             {
@@ -40,11 +40,6 @@ namespace BloodPressureWebApi.Bussiness.Mongo
                 };
                 collection.InsertOne(document.ToBsonDocument());
             }
-
-            
         }
-
-        
-
     }
 }

@@ -8,12 +8,6 @@ namespace BloodPressureDoctor.Common
     {
         public ConnectionFactory RabbitMqConnection()
         {
-            string aaa = ConfigurationManager.AppSettings["HostName"];
-            string aaa1 = ConfigurationManager.AppSettings["UserName"];
-            string aaa2 = ConfigurationManager.AppSettings["Password"];
-            string aaa3 = ConfigurationManager.AppSettings["VirtualHost"];
-            string aaa4 = ConfigurationManager.AppSettings["Port"];
-
             var factory = new ConnectionFactory
             {
                 HostName = ConfigurationManager.AppSettings["HostName"],

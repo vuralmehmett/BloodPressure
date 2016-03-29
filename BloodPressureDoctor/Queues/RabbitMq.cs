@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using BloodPressureDoctor.Abstract;
@@ -17,17 +16,16 @@ namespace BloodPressureDoctor.Queues
         public static string TopicName = ConfigurationManager.AppSettings["TopicName"];
         BloodPressureModel _patientModel = new BloodPressureModel();
 
-        private static readonly List<string> MessageList = new List<string>();
 
         public override BloodPressureModel GetMessage(int patientNo)
         {
             using (var connection = Factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
+                var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, true, null);
 
                 var consumer = new QueueingBasicConsumer(channel);
-                channel.BasicConsume(TopicName, false, consumer);
+                channel.BasicConsume(TopicName, true, consumer);
 
                 Console.WriteLine(" [*] Processing existing messages.");
 
