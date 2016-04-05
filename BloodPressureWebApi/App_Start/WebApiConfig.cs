@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using BloodPressureWebApi.Exception;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -24,6 +26,10 @@ namespace BloodPressureWebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Services.Replace(typeof(IExceptionHandler), new BloodPressureExceptionHandler());
+
+
         }
     }
 }

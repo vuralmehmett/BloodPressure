@@ -1,26 +1,34 @@
 ﻿using System.Web.Http;
-using BloodPressureWebApi.Bussiness.Mongo;
-using BloodPressureWebApi.Bussiness.QueueStructure;
 using BloodPressureWebApi.Models;
+using CommonDbManager.Interface;
+using CommonQueueManager.Interface;
+using Newtonsoft.Json;
 
 namespace BloodPressureWebApi.Controllers
 {
     public class BloodPressureController : ApiController
     {
-        private readonly DataTransfer _dataTransfer = new DataTransfer();
+        private readonly IDbManager _manager;
+        private readonly IQueueManager _queueManager;
+
+        public BloodPressureController(IDbManager manager, IQueueManager queueManager)
+        {
+            _manager = manager;
+            _queueManager = queueManager;
+        }
 
         /// <summary>
-        /// Gelen data önce kuyruga yollanıyor ardından mongoya insert ediliyor.
+        /// Gelen data önce kuyruga yollanıyor.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public IHttpActionResult SendPatientData(BloodPressureModel model)
         {
-            _dataTransfer.SendMessage(model);
-            var mongo = new InsertMongo();
-            mongo.InsertMongoDb(model);
-            return Ok("Sucess");
+            var result = _queueManager.PutData(JsonConvert.SerializeObject(model));
+            if (result)
+                return Ok();
+            return BadRequest();
         }
 
         /// <summary>
@@ -30,9 +38,7 @@ namespace BloodPressureWebApi.Controllers
         [HttpGet]
         public IHttpActionResult ReadPatientData()
         {
-            // todo : gökhana soru : burda veri kuyruktan mı okunacak yoksa mongodan mı ?
-            //var messageList =_dataTransfer.GetMessage();
-            var model =  ReadMongo.GetData();
+            var model = _manager.GetData();
             return Ok(model);
         }
     }
