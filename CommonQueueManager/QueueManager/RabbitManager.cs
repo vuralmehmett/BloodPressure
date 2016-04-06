@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Text;
 using CommonQueueManager.Interface;
 using CommonQueueManager.Model;
-using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -76,10 +75,43 @@ namespace CommonQueueManager.QueueManager
             using (var channel = connection.CreateModel())
             {
                 var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
+                var consumer = new QueueingBasicConsumer(channel);
+                try //TODO : Gokhana sor !
+                {
+                    channel.TxSelect();
+                    channel.BasicConsume(TopicName, false, consumer);
+
+                    Console.WriteLine(" [*] Processing existing messages.");
+
+                    for (int i = 0; i < queueDeclareResponse.MessageCount; i++)
+                    {
+                        var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+                        var body = ea.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        MessageList.Add(message);
+                        Console.WriteLine(" [x] Received {0}", message);
+                    }
+                    channel.TxRollback();
+                }
+                catch (Exception)
+                {
+                   channel.TxRollback();
+                }
+                
+                return MessageList;
+            }
+        }
+
+        public List<string> GetSpecificMessage(ushort messageCount)
+        {
+            using (var connection = Factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
 
                 var consumer = new QueueingBasicConsumer(channel);
                 channel.BasicConsume(TopicName, false, consumer);
-
+                channel.BasicQos(0, messageCount, true);
                 Console.WriteLine(" [*] Processing existing messages.");
 
                 for (int i = 0; i < queueDeclareResponse.MessageCount; i++)

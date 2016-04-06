@@ -24,5 +24,12 @@ namespace QueueListener.Queues
             var model = ninjectConnect.GetAllMessage();
             return model;
         }
+
+        public List<string> GetSpesificMessageWithCount(ushort messageCount)
+        {
+            var ninjectConnect = Kernel.Get<IQueueManager>();
+            var model = ninjectConnect.GetSpecificMessage(messageCount);
+            return model;
+        }
     }
 }

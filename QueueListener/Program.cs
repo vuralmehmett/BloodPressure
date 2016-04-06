@@ -9,6 +9,7 @@ namespace QueueListener
         {
             RabbitMq rabbit = new RabbitMq();
             var result = rabbit.GetQueue();
+            var resultWithCount = rabbit.GetSpesificMessageWithCount(5);
 
             MongoDb mongo = new MongoDb();
             mongo.InsertDataMongoDb(result);
