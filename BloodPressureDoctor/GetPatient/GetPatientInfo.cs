@@ -1,4 +1,6 @@
-﻿using CommonDbManager.DbManager;
+﻿using System;
+using System.Threading;
+using CommonDbManager.DbManager;
 using CommonDbManager.Interface;
 using Newtonsoft.Json;
 using Ninject;
@@ -18,7 +20,7 @@ namespace BloodPressureDoctor.GetPatient
 
         public string GetInfoWithDateBetween(string clientNo, string startDate, string finishDate)
         {
-            var result =   JsonConvert.SerializeObject(_dbManager.GetWithDateRange(clientNo, startDate, finishDate));
+            var result = JsonConvert.SerializeObject(_dbManager.GetWithDateRange(clientNo, startDate, finishDate));
             return result;
         }
 
@@ -30,7 +32,15 @@ namespace BloodPressureDoctor.GetPatient
 
         public string GetInfoWithClientNo(string clientNo)
         {
-            var result = JsonConvert.SerializeObject(_dbManager.GetWithClientNo(clientNo));
+            string result = "";
+            var patientNo = _dbManager.GetClientNo();
+            for (int i = 0; i < patientNo.Count; i++)
+            {
+                result = JsonConvert.SerializeObject(_dbManager.GetWithClientNo(patientNo[i].ToString()));
+                Console.WriteLine((i+1)+ " - " + result + Environment.NewLine);
+                Thread.Sleep(10000);
+            }
+
             return result;
         }
     }

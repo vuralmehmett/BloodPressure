@@ -6,6 +6,6 @@ namespace BloodPressureConsole.Request
     {
         public int ClientNo { get; set; }
         public string Pressure { get; set; }
-        public string TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

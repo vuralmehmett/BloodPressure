@@ -16,6 +16,7 @@ namespace CommonDbManager.DbManager
         public static string MongoDbName = ConfigurationManager.AppSettings["MongoDbName"];
         public static string MongoCollectionName = ConfigurationManager.AppSettings["MongoCollectionName"];
         public static List<BloodPressureModel> BloodPressureModels = new List<BloodPressureModel>();
+        public static List<int> PatientNo= new List<int>();
 
         public List<BloodPressureModel> GetData()
         {
@@ -101,17 +102,11 @@ namespace CommonDbManager.DbManager
             return result;
         }
 
-        /// <summary>
-        /// mongo için basit rollback yazıldı
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         public bool InsertListOfMessage(List<string> model)
         {
             var client = new MongoClient(ConnectionString);
             var database = client.GetDatabase(MongoDbName);
             var collection = database.GetCollection<BsonDocument>(MongoCollectionName);
-
 
             for (int i = 0; i < model.Count; i++)
             {
@@ -131,5 +126,22 @@ namespace CommonDbManager.DbManager
 
 
         }
+
+        public List<int> GetClientNo()
+        {
+            var client = new MongoClient(ConnectionString);
+            var database = client.GetDatabase(MongoDbName);
+            var collection = database.GetCollection<BsonDocument>(MongoCollectionName);
+
+            var result = collection.Find(Builders<BsonDocument>.Filter.Empty).ToList();
+
+            for (var i = 0; i < result.Count; i++)
+            {
+                var myObj = BsonSerializer.Deserialize<BloodPressureModel>(result[i]);
+                PatientNo.Add(myObj.ClientNo);
+            }
+
+            return PatientNo;
+        } 
     }
 }

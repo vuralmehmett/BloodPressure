@@ -11,6 +11,7 @@ namespace CommonDbManager.Interface
         List<BloodPressureModel> GetWithDate(string clientNo, string finishDate);
         List<BloodPressureModel> GetWithClientNo(string clientNo);
         bool InsertListOfMessage(List<string> model);
+        List<int> GetClientNo();
 
     }
 }

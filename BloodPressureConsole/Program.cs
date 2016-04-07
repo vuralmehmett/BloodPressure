@@ -8,26 +8,28 @@ namespace BloodPressureConsole
     {
         public static void Main(string[] args)
         {
-            Get();
+            // Get();
             Post();
         }
 
         private static void Post()
         {
-            Console.WriteLine("Please enter Patient No : ");
-            var patientNo = Console.ReadLine();
-            Console.WriteLine("Please enter Patient Pressure");
-            var patientPressure = Console.ReadLine();
+            Random rnd = new Random();
+            //Console.WriteLine("Please enter Patient No : ");
+            //var patientNo = Console.ReadLine();
+            //Console.WriteLine("Please enter Patient Pressure");
+            //var patientPressure = Console.ReadLine();
 
             var bloodPressureRequest = new BloodPressureRequest
             {
-                ClientNo = Convert.ToInt16(patientNo),
-                Pressure = patientPressure,
-                TimeStamp = DateTime.Today.ToShortDateString()
+                ClientNo = Convert.ToInt16(rnd.Next(1, 10000)),
+                Pressure = "test",//patientPressure,
+                TimeStamp = DateTime.Now
             };
             var connection = new Connection();
             var read = connection.Post(bloodPressureRequest);
-            Console.WriteLine(read);
+       
+            Console.WriteLine("bitti");
             Console.ReadLine();
         }
 

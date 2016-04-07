@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using BloodPressureConsole.Request;
 
 namespace BloodPressureConsole.BaseHtttpRequest
@@ -27,25 +30,36 @@ namespace BloodPressureConsole.BaseHtttpRequest
 
         public string Post(BloodPressureRequest model)
         {
-            var webrequest = WebRequest.Create(Url + "SendPatientData");
-            var enc = new UTF8Encoding(false);
-            var serializedJson = Newtonsoft.Json.JsonConvert.SerializeObject(model);
-            var data = enc.GetBytes(serializedJson);
+            string result = "";
+            Random rnd = new Random();
 
-            webrequest.Method = "POST";
-            webrequest.ContentType = "application/json";
-            webrequest.ContentLength = data.Length;
-            webrequest.Timeout = 500000000;
-
-            using (var sr = webrequest.GetRequestStream())
+            Parallel.For(0, 500, y =>
             {
-                sr.Write(data, 0, data.Length);
-            }
-            var res = webrequest.GetResponse();
-            // ReSharper disable once AssignNullToNotNullAttribute
-            var result = new StreamReader(res.GetResponseStream()).ReadToEnd();
+                model.ClientNo = rnd.Next(1, 10000);
+                var webrequest = WebRequest.Create(Url + "SendPatientData");
+                var enc = new UTF8Encoding(false);
+                var serializedJson = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                var data = enc.GetBytes(serializedJson);
+
+                webrequest.Method = "POST";
+                webrequest.ContentType = "application/json";
+                webrequest.ContentLength = data.Length;
+                webrequest.Timeout = 500000000;
+
+                using (var sr = webrequest.GetRequestStream())
+                {
+                    sr.Write(data, 0, data.Length);
+                }
+                var res = webrequest.GetResponse();
+                Thread.Sleep(1);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                result = new StreamReader(res.GetResponseStream()).ReadToEnd();
+
+            });
 
             return result;
+
+
         }
     }
 }
