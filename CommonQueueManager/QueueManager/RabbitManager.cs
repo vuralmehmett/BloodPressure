@@ -76,9 +76,9 @@ namespace CommonQueueManager.QueueManager
             {
                 var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
                 var consumer = new QueueingBasicConsumer(channel);
-                try //TODO : Gokhana sor !
+
+                try
                 {
-                    channel.TxSelect();
                     channel.BasicConsume(TopicName, false, consumer);
 
                     Console.WriteLine(" [*] Processing existing messages.");
@@ -91,12 +91,16 @@ namespace CommonQueueManager.QueueManager
                         MessageList.Add(message);
                         Console.WriteLine(" [x] Received {0}", message);
                     }
-                    channel.TxRollback();
+
                 }
                 catch (Exception)
                 {
-                   channel.TxRollback();
+                    var response = channel.BasicGet(TopicName, false);
+                    channel.BasicNack(response.DeliveryTag, true, true);
+                    throw;
                 }
+                    
+                    
                 
                 return MessageList;
             }

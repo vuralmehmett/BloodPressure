@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using CommonDbManager.Extensions;
 using CommonDbManager.Interface;
 using CommonDbManager.Model;
 using MongoDB.Bson;
@@ -113,27 +112,21 @@ namespace CommonDbManager.DbManager
             var database = client.GetDatabase(MongoDbName);
             var collection = database.GetCollection<BsonDocument>(MongoCollectionName);
 
-            try
+
+            for (int i = 0; i < model.Count; i++)
             {
-                for (int i = 0; i < model.Count; i++)
+                var serializedJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BloodPressureModel>(model[i]);
+
+                var document = new BloodPressureModel
                 {
-                    var serializedJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BloodPressureModel>(model[i]);
+                    ClientNo = serializedJson.ClientNo,
+                    Pressure = serializedJson.Pressure,
+                    TimeStamp = serializedJson.TimeStamp,
+                };
 
-                    var document = new BloodPressureModel
-                    {
-                        ClientNo = serializedJson.ClientNo,
-                        Pressure = serializedJson.Pressure,
-                        TimeStamp = serializedJson.TimeStamp,
-                    };
+                collection.InsertOne(document.ToBsonDocument());
+            }
 
-                    collection.InsertOne(document.ToBsonDocument());
-                }
-            }
-            catch (Exception)
-            {
-                ExtensionMethod mongo = new ExtensionMethod();
-                mongo.Rollback(model);
-            }
             return true;
 
 

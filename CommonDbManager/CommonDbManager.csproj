@@ -67,7 +67,6 @@
   <ItemGroup>
     <Compile Include="DbManager\MongoManager.cs" />
     <Compile Include="DbManager\DbModule.cs" />
-    <Compile Include="Extensions\ExtensionMethod.cs" />
     <Compile Include="Interface\IDbManager.cs" />
     <Compile Include="Model\BloodPressureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
