@@ -118,6 +118,8 @@ namespace CommonQueueManager.QueueManager
                 channel.BasicQos(0, messageCount, true);
                 Console.WriteLine(" [*] Processing existing messages.");
 
+
+                // TODO : aşağıda ki queueDeclareResponse.MessageCount degeri yerine istediğimiz mesaj sayısını koyduğumuzda çalışıyor ancak bu bence kötü yontem.
                 for (int i = 0; i < queueDeclareResponse.MessageCount; i++)
                 {
                     var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();

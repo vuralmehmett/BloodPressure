@@ -9,10 +9,6 @@ namespace QueueListener.Queues
     {
         public readonly StandardKernel Kernel = new StandardKernel();
 
-
-        //TODO : StartRead, ConfirmRead RollbackRead kuyrukta put olması lazım ortak projede webapi ve console uygulamalarının hepsi kullansın
-        //TODO : thread loopunda verileri kuyruktan cekilecek ve belli sayıda gelecek.
-
         public RabbitMq()
         {
             Kernel.Load(new QueueModule());
