@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using CommonDbManager.DbManager;
 using CommonDbManager.Interface;
@@ -30,18 +31,16 @@ namespace BloodPressureDoctor.GetPatient
             return result;
         }
 
-        public string GetInfoWithClientNo(string clientNo)
+        public List<int> GetAllClientIds()
         {
-            string result = "";
-            var patientNo = _dbManager.GetClientNo();
-            for (int i = 0; i < patientNo.Count; i++)
-            {
-                result = JsonConvert.SerializeObject(_dbManager.GetWithClientNo(patientNo[i].ToString()));
-                Console.WriteLine((i+1)+ " - " + result + Environment.NewLine);
-                Thread.Sleep(10000);
-            }
+            return _dbManager.GetClientNo();
+        }
 
-            return result;
+        public string GetInfoWithClientNo(int clientNo)
+        {
+            string clientNoStr = clientNo.ToString();
+
+            return JsonConvert.SerializeObject(_dbManager.GetWithClientNo(clientNoStr), Formatting.Indented);
         }
     }
 }

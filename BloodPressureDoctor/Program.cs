@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using BloodPressureDoctor.GetPatient;
 using CommonDbManager.DbManager;
 using CommonDbManager.Interface;
+using Newtonsoft.Json;
 
 namespace BloodPressureDoctor
 {
     class Program
     {
-        private static readonly IDbManager DbManager = new MongoManager();
-        public static readonly GetPatientInfo Info = new GetPatientInfo(DbManager);
-        public static string PatientData;
         static void Main(string[] args)
         {
             //Console.WriteLine("Welcome to Patient Managment System." + Environment.NewLine);
@@ -17,48 +17,58 @@ namespace BloodPressureDoctor
             //var selection = Console.ReadLine();
             Random rnd = new Random();
             //int choice;
-            var clientNo = "";
-            PatientData = Info.GetInfoWithClientNo(rnd.Next(0, 10000).ToString());
-            //if (int.TryParse(selection, out choice))
-            //{
-            //    string finishDate;
-            //    switch (choice)
-            //    {
-            //        case 1:
-            //            Console.WriteLine("Enter a patient number : ");
-            //            clientNo = Console.ReadLine();
-            //            Console.WriteLine("Enter a start date : ");
-            //            var startDate = Console.ReadLine();
-            //            Console.WriteLine("Enter a finish date : ");
-            //            finishDate = Console.ReadLine();
-            //            PatientData = Info.GetInfoWithDateBetween(clientNo, startDate, finishDate);
 
-            //            break;
-            //        case 2:
-            //            Console.WriteLine("Enter a patient number : ");
-            //            clientNo = Console.ReadLine();
-            //            Console.WriteLine("Enter a finish date : ");
-            //            finishDate = Console.ReadLine();
-            //            PatientData = Info.GetInfoWithDate(clientNo, finishDate);
+            IDbManager DbManager = new MongoManager();
+            GetPatientInfo Info = new GetPatientInfo(DbManager);
 
-            //            break;
-            //        default:
-            //            Console.WriteLine("Enter a patient number : ");
-            //            clientNo = Console.ReadLine();
-            //            PatientData = Info.GetInfoWithClientNo(rnd.Next(0,10000).ToString());
-            //            break;
-            //    }
+            while (true)
+            {
+                List<int> allClientNos = Info.GetAllClientIds();
+                int selectedClientId = allClientNos[rnd.Next(0, allClientNos.Count)];
 
-            //    if (PatientData == "[]")
-            //    {
-            //        Console.WriteLine("Does not information about patient.");
-            //        Console.WriteLine("Enter exit." + Environment.NewLine);
-            //        Console.ReadLine();
-            //    }
-            Console.WriteLine(PatientData + Environment.NewLine);
-                Console.WriteLine("Enter exit." + Environment.NewLine);
-                Console.ReadLine();
+                string PatientData = Info.GetInfoWithClientNo(selectedClientId);
+                //if (int.TryParse(selection, out choice))
+                //{
+                //    string finishDate;
+                //    switch (choice)
+                //    {
+                //        case 1:
+                //            Console.WriteLine("Enter a patient number : ");
+                //            clientNo = Console.ReadLine();
+                //            Console.WriteLine("Enter a start date : ");
+                //            var startDate = Console.ReadLine();
+                //            Console.WriteLine("Enter a finish date : ");
+                //            finishDate = Console.ReadLine();
+                //            PatientData = Info.GetInfoWithDateBetween(clientNo, startDate, finishDate);
+
+                //            break;
+                //        case 2:
+                //            Console.WriteLine("Enter a patient number : ");
+                //            clientNo = Console.ReadLine();
+                //            Console.WriteLine("Enter a finish date : ");
+                //            finishDate = Console.ReadLine();
+                //            PatientData = Info.GetInfoWithDate(clientNo, finishDate);
+
+                //            break;
+                //        default:
+                //            Console.WriteLine("Enter a patient number : ");
+                //            clientNo = Console.ReadLine();
+                //            PatientData = Info.GetInfoWithClientNo(rnd.Next(0,10000).ToString());
+                //            break;
+                //    }
+
+                //    if (PatientData == "[]")
+                //    {
+                //        Console.WriteLine("Does not information about patient.");
+                //        Console.WriteLine("Enter exit." + Environment.NewLine);
+                //        Console.ReadLine();
+                //    }
+                
+                Console.WriteLine("Doctor read: {0} for patient: {1}", PatientData, selectedClientId);
+
+                Thread.Sleep(2);
             }
         }
-    
+    }
+
 }

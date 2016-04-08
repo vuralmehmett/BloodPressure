@@ -11,7 +11,9 @@ namespace BloodPressureWebApi.Logger
         public override void Log(ExceptionLoggerContext context)
         {
             var log = context.Exception.ToString();
-            File.WriteAllText(LogPath + "log.txt",log);
+            File.WriteAllText(LogPath + "log.txt", log);
+            log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            logger.Error(log);
         }
     }
 }
