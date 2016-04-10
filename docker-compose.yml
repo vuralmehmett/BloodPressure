@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+  bp-mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+
+  bp-rabbit:
+    image: rabbitmq:3-management
+    ports: 
+      - 8080:15672
+    hostname: bloodpressure-rabbit
+
