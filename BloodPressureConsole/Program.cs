@@ -29,7 +29,7 @@ namespace BloodPressureConsole
             var connection = new Connection();
             var read = connection.Post(bloodPressureRequest);
 
-            Console.WriteLine("Generating a sample for task id {0}", taskId);
+            Console.WriteLine("Generated a sample for task id {0}", taskId);
         }
 
         private static void Get()

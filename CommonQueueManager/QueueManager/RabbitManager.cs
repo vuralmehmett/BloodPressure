@@ -11,11 +11,9 @@ namespace CommonQueueManager.QueueManager
 {
     public class RabbitManager : IQueueManager
     {
-        private static readonly List<string> MessageList = new List<string>();
         private static readonly Connector RabbitMqConnection = new Connector();
         private static readonly ConnectionFactory Factory = RabbitMqConnection.RabbitMqConnection();
         private static readonly string TopicName = ConfigurationManager.AppSettings["TopicName"];
-        private BloodPressureModel _patientModel = new BloodPressureModel();
 
         public bool PutData(string data)
         {
@@ -41,10 +39,12 @@ namespace CommonQueueManager.QueueManager
 
         public BloodPressureModel PullData(int patientNo)
         {
+            BloodPressureModel _patientModel = new BloodPressureModel();
+
             using (var connection = Factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, true, null);
+                var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
 
                 var consumer = new QueueingBasicConsumer(channel);
                 channel.BasicConsume(TopicName, true, consumer);
@@ -66,11 +66,12 @@ namespace CommonQueueManager.QueueManager
 
                 return _patientModel;
             }
-
         }
 
         public List<string> GetAllMessage()
         {
+            List<string> MessageList = new List<string>();
+
             using (var connection = Factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
@@ -79,7 +80,7 @@ namespace CommonQueueManager.QueueManager
 
                 try
                 {
-                    channel.BasicConsume(TopicName, false, consumer);
+                    channel.BasicConsume(TopicName, true, consumer);
 
                     Console.WriteLine(" [*] Processing existing messages.");
 
@@ -99,26 +100,25 @@ namespace CommonQueueManager.QueueManager
                     channel.BasicNack(response.DeliveryTag, true, true);
                     throw;
                 }
-                    
-                    
-                
+
                 return MessageList;
             }
         }
 
         public List<string> GetSpecificMessage(ushort messageCount)
         {
+            List<string> MessageList = new List<string>();
+
             using (var connection = Factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
 
                 var consumer = new QueueingBasicConsumer(channel);
-                channel.BasicConsume(TopicName, false, consumer);
+                channel.BasicConsume(TopicName, true, consumer);
                 channel.BasicQos(0, messageCount, true);
                 Console.WriteLine(" [*] Processing existing messages.");
-
-
+                
                 // TODO : aşağıda ki queueDeclareResponse.MessageCount degeri yerine istediğimiz mesaj sayısını koyduğumuzda çalışıyor ancak bu bence kötü yontem.
                 for (int i = 0; i < queueDeclareResponse.MessageCount; i++)
                 {
@@ -128,6 +128,7 @@ namespace CommonQueueManager.QueueManager
                     MessageList.Add(message);
                     Console.WriteLine(" [x] Received {0}", message);
                 }
+
                 return MessageList;
             }
         }

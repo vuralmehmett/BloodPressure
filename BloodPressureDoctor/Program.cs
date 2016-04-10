@@ -24,51 +24,59 @@ namespace BloodPressureDoctor
             while (true)
             {
                 List<int> allClientNos = Info.GetAllClientIds();
-                int selectedClientId = allClientNos[rnd.Next(0, allClientNos.Count)];
 
-                string PatientData = Info.GetInfoWithClientNo(selectedClientId);
-                //if (int.TryParse(selection, out choice))
-                //{
-                //    string finishDate;
-                //    switch (choice)
-                //    {
-                //        case 1:
-                //            Console.WriteLine("Enter a patient number : ");
-                //            clientNo = Console.ReadLine();
-                //            Console.WriteLine("Enter a start date : ");
-                //            var startDate = Console.ReadLine();
-                //            Console.WriteLine("Enter a finish date : ");
-                //            finishDate = Console.ReadLine();
-                //            PatientData = Info.GetInfoWithDateBetween(clientNo, startDate, finishDate);
+                if (allClientNos.Count == 0)
+                {
+                    Console.WriteLine("Doctor unable to read because no data avail for any patient");
+                }
+                else
+                {
+                    int selectedClientId = allClientNos[rnd.Next(0, allClientNos.Count)];
 
-                //            break;
-                //        case 2:
-                //            Console.WriteLine("Enter a patient number : ");
-                //            clientNo = Console.ReadLine();
-                //            Console.WriteLine("Enter a finish date : ");
-                //            finishDate = Console.ReadLine();
-                //            PatientData = Info.GetInfoWithDate(clientNo, finishDate);
+                    string PatientData = Info.GetInfoWithClientNo(selectedClientId);
+                    //if (int.TryParse(selection, out choice))
+                    //{
+                    //    string finishDate;
+                    //    switch (choice)
+                    //    {
+                    //        case 1:
+                    //            Console.WriteLine("Enter a patient number : ");
+                    //            clientNo = Console.ReadLine();
+                    //            Console.WriteLine("Enter a start date : ");
+                    //            var startDate = Console.ReadLine();
+                    //            Console.WriteLine("Enter a finish date : ");
+                    //            finishDate = Console.ReadLine();
+                    //            PatientData = Info.GetInfoWithDateBetween(clientNo, startDate, finishDate);
 
-                //            break;
-                //        default:
-                //            Console.WriteLine("Enter a patient number : ");
-                //            clientNo = Console.ReadLine();
-                //            PatientData = Info.GetInfoWithClientNo(rnd.Next(0,10000).ToString());
-                //            break;
-                //    }
+                    //            break;
+                    //        case 2:
+                    //            Console.WriteLine("Enter a patient number : ");
+                    //            clientNo = Console.ReadLine();
+                    //            Console.WriteLine("Enter a finish date : ");
+                    //            finishDate = Console.ReadLine();
+                    //            PatientData = Info.GetInfoWithDate(clientNo, finishDate);
 
-                //    if (PatientData == "[]")
-                //    {
-                //        Console.WriteLine("Does not information about patient.");
-                //        Console.WriteLine("Enter exit." + Environment.NewLine);
-                //        Console.ReadLine();
-                //    }
-                
-                Console.WriteLine("Doctor read: {0} for patient: {1}", PatientData, selectedClientId);
+                    //            break;
+                    //        default:
+                    //            Console.WriteLine("Enter a patient number : ");
+                    //            clientNo = Console.ReadLine();
+                    //            PatientData = Info.GetInfoWithClientNo(rnd.Next(0,10000).ToString());
+                    //            break;
+                    //    }
 
-                Thread.Sleep(2);
+                    //    if (PatientData == "[]")
+                    //    {
+                    //        Console.WriteLine("Does not information about patient.");
+                    //        Console.WriteLine("Enter exit." + Environment.NewLine);
+                    //        Console.ReadLine();
+                    //    }
+
+                    // Console.WriteLine("Doctor read: {0} for patient: {1}", PatientData, selectedClientId);
+                    Console.WriteLine("Doctor read for patient: {0}", selectedClientId);
+                }
+
+                Thread.Sleep(10);
             }
         }
     }
-
 }

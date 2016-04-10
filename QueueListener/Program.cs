@@ -24,7 +24,7 @@ namespace QueueListener
 
                 Console.WriteLine("Task: {0}, processed from queue {1} messages", taskId, result.Count);
 
-                Thread.Sleep(10);
+                Thread.Sleep(50);
             }
         }
     }
@@ -33,7 +33,7 @@ namespace QueueListener
     {
         static void Main(string[] args)
         {
-            const int NO_OF_TASKS = 1;
+            const int NO_OF_TASKS = 5;
             List<Task> listOfTask = new List<Task>();
 
             for (int i = 0; i < NO_OF_TASKS; ++i)
