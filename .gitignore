@@ -5,3 +5,11 @@ BloodPressureDoctor/bin/
 BloodPressureWebApi/bin/
 BloodPressureWebApi/obj/
 packages/
+QueueListener/bin/
+CommonQueueManager/bin/
+CommonQueueManager/obj/
+CommonDbManager/bin/
+CommonDbManager/obj/
+QueueListener/obj/
+.vs/
+*.user

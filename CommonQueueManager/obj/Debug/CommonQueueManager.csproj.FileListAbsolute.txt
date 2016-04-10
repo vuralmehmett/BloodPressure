@@ -10,3 +10,15 @@ D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\CommonQueueM
 D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\CommonQueueManager\obj\Debug\CommonQueueManager.csprojResolveAssemblyReference.cache
 D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\CommonQueueManager\obj\Debug\CommonQueueManager.dll
 D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\CommonQueueManager\obj\Debug\CommonQueueManager.pdb
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\CommonQueueManager.dll.config
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\CommonQueueManager.dll
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\CommonQueueManager.pdb
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\Newtonsoft.Json.dll
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\Ninject.dll
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\RabbitMQ.Client.dll
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\Newtonsoft.Json.xml
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\Ninject.xml
+C:\Work\BloodPressure\CommonQueueManager\bin\Debug\RabbitMQ.Client.xml
+C:\Work\BloodPressure\CommonQueueManager\obj\Debug\CommonQueueManager.csprojResolveAssemblyReference.cache
+C:\Work\BloodPressure\CommonQueueManager\obj\Debug\CommonQueueManager.dll
+C:\Work\BloodPressure\CommonQueueManager\obj\Debug\CommonQueueManager.pdb

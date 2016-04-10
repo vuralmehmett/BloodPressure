@@ -19,3 +19,24 @@ D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\QueueListene
 D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\QueueListener\bin\Debug\Ninject.xml
 D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\QueueListener\bin\Debug\CommonQueueManager.dll
 D:\Users\mvural\Documents\Visual Studio 2015\Projects\BloodPressure\QueueListener\bin\Debug\CommonQueueManager.pdb
+C:\Work\BloodPressure\QueueListener\bin\Debug\QueueListener.exe.config
+C:\Work\BloodPressure\QueueListener\bin\Debug\QueueListener.exe
+C:\Work\BloodPressure\QueueListener\bin\Debug\QueueListener.pdb
+C:\Work\BloodPressure\QueueListener\bin\Debug\CommonDbManager.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\CommonQueueManager.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\MongoDB.Bson.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\MongoDB.Driver.Core.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\MongoDB.Driver.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\Newtonsoft.Json.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\Ninject.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\RabbitMQ.Client.dll
+C:\Work\BloodPressure\QueueListener\bin\Debug\CommonDbManager.pdb
+C:\Work\BloodPressure\QueueListener\bin\Debug\CommonQueueManager.pdb
+C:\Work\BloodPressure\QueueListener\bin\Debug\MongoDB.Bson.xml
+C:\Work\BloodPressure\QueueListener\bin\Debug\MongoDB.Driver.xml
+C:\Work\BloodPressure\QueueListener\bin\Debug\Newtonsoft.Json.xml
+C:\Work\BloodPressure\QueueListener\bin\Debug\Ninject.xml
+C:\Work\BloodPressure\QueueListener\bin\Debug\RabbitMQ.Client.xml
+C:\Work\BloodPressure\QueueListener\obj\Debug\QueueListener.csprojResolveAssemblyReference.cache
+C:\Work\BloodPressure\QueueListener\obj\Debug\QueueListener.exe
+C:\Work\BloodPressure\QueueListener\obj\Debug\QueueListener.pdb
