@@ -5,12 +5,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BloodPressureConsole.Request;
+using System.Configuration;
 
 namespace BloodPressureConsole.BaseHtttpRequest
 {
     public class Connection
     {
-        public static string Url { get; } = "http://192.168.86.1/BloodPressureWebApi/api/BloodPressure/";
+        public static string Url
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["BloodPressureServiceApiAddress"];
+            }
+        }
 
         public string Get()
         {
