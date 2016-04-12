@@ -10,11 +10,11 @@ namespace CommonQueueManager
         {
             var factory = new ConnectionFactory
             {
-                HostName = ConfigurationManager.AppSettings["HostName"],
-                UserName = ConfigurationManager.AppSettings["UserName"],
-                Password = ConfigurationManager.AppSettings["Password"],
-                VirtualHost = ConfigurationManager.AppSettings["VirtualHost"],
-                Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"])
+                HostName = ConfigurationManager.AppSettings["RabbitMqHostName"],
+                UserName = ConfigurationManager.AppSettings["RabbitMqUserName"],
+                Password = ConfigurationManager.AppSettings["RabbitMqPassword"],
+                VirtualHost = ConfigurationManager.AppSettings["RabbitMqVirtualHost"],
+                Port = Convert.ToInt32(ConfigurationManager.AppSettings["RabbitMqPort"])
             };
 
             return factory;

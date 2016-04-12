@@ -13,7 +13,7 @@ namespace CommonQueueManager.QueueManager
     {
         private static readonly Connector RabbitMqConnection = new Connector();
         private static readonly ConnectionFactory Factory = RabbitMqConnection.RabbitMqConnection();
-        private static readonly string TopicName = ConfigurationManager.AppSettings["TopicName"];
+        private static readonly string TopicName = ConfigurationManager.AppSettings["RabbitMqTopicName"];
 
         public bool PutData(string data)
         {
@@ -27,7 +27,6 @@ namespace CommonQueueManager.QueueManager
                     arguments: null);
 
                 var body = Encoding.UTF8.GetBytes(data);
-
                 channel.BasicPublish(exchange: "",
                     routingKey: TopicName,
                     basicProperties: null,

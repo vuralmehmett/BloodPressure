@@ -45,7 +45,7 @@ namespace BloodPressureConsole
             {
                 Post(taskId);
 
-                Thread.Sleep(5);
+                //Thread.Sleep(5);
             }
         }
     }

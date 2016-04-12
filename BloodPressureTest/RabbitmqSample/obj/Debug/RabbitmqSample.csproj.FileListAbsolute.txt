@@ -1,0 +1,17 @@
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\RabbitmqSample.exe.config
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\RabbitmqSample.exe
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\RabbitmqSample.pdb
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\EasyNetQ.dll
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\RabbitMQ.Client.dll
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\EasyNetQ.xml
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\RabbitMQ.Client.xml
+D:\Projects\AsyncProgram\RabbitmqSample\obj\Debug\RabbitmqSample.csprojResolveAssemblyReference.cache
+D:\Projects\AsyncProgram\RabbitmqSample\obj\Debug\RabbitmqSample.exe
+D:\Projects\AsyncProgram\RabbitmqSample\obj\Debug\RabbitmqSample.pdb
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\MongoDB.Bson.dll
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\MongoDB.Driver.Core.dll
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\MongoDB.Driver.dll
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\MongoDB.Bson.xml
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\MongoDB.Driver.xml
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\AsyncProgram\RabbitmqSample\bin\Debug\Newtonsoft.Json.xml

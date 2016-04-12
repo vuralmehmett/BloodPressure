@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonDbManager", "CommonDb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonQueueManager", "CommonQueueManager\CommonQueueManager.csproj", "{E6ACE206-47F1-4241-BDCC-7836ECD09C71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMongo", "BloodPressureTest\ConnectMongo\TestMongo.csproj", "{52EBFA19-D7AC-4154-8386-C38F90460B67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRabbitmq", "BloodPressureTest\RabbitmqSample\TestRabbitmq.csproj", "{6AD488A1-2080-4BEC-A79C-33F39FBA0708}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{E6ACE206-47F1-4241-BDCC-7836ECD09C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6ACE206-47F1-4241-BDCC-7836ECD09C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6ACE206-47F1-4241-BDCC-7836ECD09C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52EBFA19-D7AC-4154-8386-C38F90460B67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EBFA19-D7AC-4154-8386-C38F90460B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EBFA19-D7AC-4154-8386-C38F90460B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52EBFA19-D7AC-4154-8386-C38F90460B67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AD488A1-2080-4BEC-A79C-33F39FBA0708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD488A1-2080-4BEC-A79C-33F39FBA0708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD488A1-2080-4BEC-A79C-33F39FBA0708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD488A1-2080-4BEC-A79C-33F39FBA0708}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
