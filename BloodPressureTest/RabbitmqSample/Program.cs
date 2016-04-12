@@ -24,7 +24,7 @@ namespace TestRabbitMq
         {
             public static void SendMessage()
             {
-                const int NO_OF_TASKS = 20;
+                const int NO_OF_TASKS = 5;
 
                 List<Task> listOfTask = new List<Task>();
 
