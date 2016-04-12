@@ -13,3 +13,7 @@ CommonDbManager/obj/
 QueueListener/obj/
 .vs/
 *.user
+BloodPressureTest/ConnectMongo/bin/
+BloodPressureTest/ConnectMongo/obj/
+BloodPressureTest/RabbitmqSample/bin/
+BloodPressureTest/RabbitmqSample/obj/
