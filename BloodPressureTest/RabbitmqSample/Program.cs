@@ -10,8 +10,19 @@ namespace TestRabbitMq
     {
         static void Main(string[] args)
         {
-            GetMessageFromRabbit();
-            //TestSendMessage.SendMessage();
+            TestSendMessage.SendMessage();
+        }
+
+        public class GetPseudoData
+        {
+            public static void Start(int partitionId)
+            {
+                RabbitManager manager = new RabbitManager();
+
+                Receive receive = new Receive();
+
+                receive.GetOneByOneMessage(manager, 10, 5);
+            }
         }
 
         public class PseudoDataGenerator
@@ -35,7 +46,7 @@ namespace TestRabbitMq
         {
             public static void SendMessage()
             {
-                const int NO_OF_TASKS = 5;
+                const int NO_OF_TASKS = 1;
 
                 List<Task> listOfTask = new List<Task>();
 
@@ -45,7 +56,8 @@ namespace TestRabbitMq
 
                     Task tsk = new Task(() =>
                     {
-                        PseudoDataGenerator.Start(partitionId);
+                        GetPseudoData.Start(partitionId);
+                        //PseudoDataGenerator.Start(partitionId);
 
                     }, TaskCreationOptions.LongRunning);
 
@@ -58,10 +70,6 @@ namespace TestRabbitMq
             }
         }
 
-        public static void GetMessageFromRabbit()
-        {
-            Receive getAllMessage = new Receive();
-            getAllMessage.GetMessage();
-        }
+
     }
 }

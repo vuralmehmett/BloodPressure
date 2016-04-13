@@ -41,7 +41,7 @@ namespace CommonQueueManager.QueueManager
 
         public BloodPressureModel PullData(int patientNo)
         {
-            BloodPressureModel _patientModel = new BloodPressureModel();
+            var patientModel = new BloodPressureModel();
 
             var channel = QueueConnectionFactory.GetChannelPerThreadId(Thread.CurrentThread.ManagedThreadId);
 
@@ -60,17 +60,17 @@ namespace CommonQueueManager.QueueManager
                 var serializedJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BloodPressureModel>(message);
                 if (serializedJson.ClientNo == patientNo)
                 {
-                    _patientModel = serializedJson;
+                    patientModel = serializedJson;
                 }
                 Console.WriteLine(" [x] Received {0}", message);
             }
 
-            return _patientModel;
+            return patientModel;
         }
 
         public List<string> GetAllMessage()
         {
-            List<string> MessageList = new List<string>();
+            var messageList = new List<string>();
 
             var channel = QueueConnectionFactory.GetChannelPerThreadId(Thread.CurrentThread.ManagedThreadId);
 
@@ -88,7 +88,7 @@ namespace CommonQueueManager.QueueManager
                     var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
                     var body = ea.Body;
                     var message = Encoding.UTF8.GetString(body);
-                    MessageList.Add(message);
+                    messageList.Add(message);
                     Console.WriteLine(" [x] Received {0}", message);
                 }
 
@@ -100,33 +100,25 @@ namespace CommonQueueManager.QueueManager
                 throw;
             }
 
-            return MessageList;
+            return messageList;
         }
 
-        public List<string> GetSpecificMessage(ushort messageCount)
+        public List<string> GetSpecificMessage(int messageCount)
         {
-            List<string> MessageList = new List<string>();
-
+            var messageList = new List<string>();
             var channel = QueueConnectionFactory.GetChannelPerThreadId(Thread.CurrentThread.ManagedThreadId);
+            channel.QueueDeclare(TopicName, false, false, false, null);
 
-            var queueDeclareResponse = channel.QueueDeclare(TopicName, false, false, false, null);
-
-            var consumer = new QueueingBasicConsumer(channel);
-            channel.BasicConsume(TopicName, true, consumer);
-            channel.BasicQos(0, messageCount, true);
-            Console.WriteLine(" [*] Processing existing messages.");
-                
-            // TODO : aşağıda ki queueDeclareResponse.MessageCount degeri yerine istediğimiz mesaj sayısını koyduğumuzda çalışıyor ancak bu bence kötü yontem.
-            for (int i = 0; i < queueDeclareResponse.MessageCount; i++)
+            for (int i = 0; i < messageCount; i++)
             {
-                var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
-                var body = ea.Body;
-                var message = Encoding.UTF8.GetString(body);
-                MessageList.Add(message);
-                Console.WriteLine(" [x] Received {0}", message);
+                var data = channel.BasicGet(TopicName, true);
+                if(data == null)continue;
+                var response = Encoding.UTF8.GetString(data.Body);
+                messageList.Add(response);
             }
 
-            return MessageList;
+            return messageList;
         }
+        
     }
 }

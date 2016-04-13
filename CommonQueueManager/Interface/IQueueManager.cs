@@ -8,7 +8,7 @@ namespace CommonQueueManager.Interface
         bool PutData(string model);
         BloodPressureModel PullData(int patientNo);
         List<string> GetAllMessage();
-        List<string> GetSpecificMessage(ushort messageCount);
+        List<string> GetSpecificMessage(int messageCount);
 
 
     }
