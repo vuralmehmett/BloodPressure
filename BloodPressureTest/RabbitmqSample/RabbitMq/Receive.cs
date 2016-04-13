@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
+using CommonQueueManager.QueueManager;
+using MongoDB.Driver.Core.WireProtocol.Messages;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -9,13 +11,14 @@ namespace TestRabbitMq.RabbitMq
 {
     public class Receive
     {
-        private static readonly List<string> MessageList = new List<string>();
+        private static List<string> MessageList = new List<string>();
         private static readonly string HostName = ConfigurationManager.AppSettings["RabbitMqHostName"];
         private static readonly string UserName = ConfigurationManager.AppSettings["RabbitMqUserName"];
         private static readonly string Password = ConfigurationManager.AppSettings["RabbitMqPassword"];
         private static readonly string VirtualHost = ConfigurationManager.AppSettings["RabbitMqVirtualHost"];
         private static readonly string Port = ConfigurationManager.AppSettings["RabbitMqPort"];
         private static readonly string TopicName = ConfigurationManager.AppSettings["RabbitMqTopicName"];
+        private static readonly RabbitManager Manager = new RabbitManager();
 
         public void ReceiveMessage()
         {
@@ -103,6 +106,12 @@ namespace TestRabbitMq.RabbitMq
 
             var asd = MessageList;
             return "";
+        }
+
+        public List<string> GetMessage()
+        {
+            MessageList = Manager.GetAllMessage();
+            return MessageList;
         }
 
         

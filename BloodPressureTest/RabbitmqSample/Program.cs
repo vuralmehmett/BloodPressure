@@ -10,7 +10,8 @@ namespace TestRabbitMq
     {
         static void Main(string[] args)
         {
-            TestSendMessage.SendMessage();
+            GetMessageFromRabbit();
+            //TestSendMessage.SendMessage();
         }
 
         public class PseudoDataGenerator
@@ -20,7 +21,7 @@ namespace TestRabbitMq
                 RabbitManager manager = new RabbitManager();
 
                 while (true)
-                { 
+                {
                     Send send = new Send();
 
                     string message = string.Format("Test messages for partition id: {0}", partitionId);
@@ -57,6 +58,10 @@ namespace TestRabbitMq
             }
         }
 
+        public static void GetMessageFromRabbit()
+        {
+            Receive getAllMessage = new Receive();
+            getAllMessage.GetMessage();
+        }
     }
-
 }
