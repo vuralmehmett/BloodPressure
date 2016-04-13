@@ -57,6 +57,7 @@
     <Compile Include="Interface\IQueueManager.cs" />
     <Compile Include="Model\BloodPressureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueueManager\QueueConnectionFactory.cs" />
     <Compile Include="QueueManager\QueueModule.cs" />
     <Compile Include="QueueManager\RabbitManager.cs" />
   </ItemGroup>
