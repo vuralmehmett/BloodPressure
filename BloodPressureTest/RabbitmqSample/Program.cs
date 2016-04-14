@@ -10,7 +10,7 @@ namespace TestRabbitMq
     {
         static void Main(string[] args)
         {
-            TestSendMessage.SendMessage();
+            TestOperations.CreateTasks();
         }
 
         public class GetPseudoData
@@ -42,9 +42,9 @@ namespace TestRabbitMq
             }
         }
 
-        public class TestSendMessage
+        public class TestOperations
         {
-            public static void SendMessage()
+            public static void CreateTasks()
             {
                 const int NO_OF_TASKS = 1;
 
